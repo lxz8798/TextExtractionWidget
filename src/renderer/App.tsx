@@ -1,40 +1,22 @@
 import { MemoryRouter as Router, Routes, Route } from 'react-router-dom';
-import icon from '../../assets/icon.svg';
+import FileUploader from '../components/FileUploader/index';
 import './App.css';
 
 function Hello() {
+  FileUploader.defaultProps = {
+    options: {
+      type: 'word',
+      buttonText: '上传word',
+    },
+  };
+  const handleUpload = (file: File) => {
+    console.log('上传文件：', file);
+  };
   return (
-    <div>
-      <div className="Hello">
-        <img width="200" alt="icon" src={icon} />
-      </div>
-      <h1>electron-react-boilerplate</h1>
-      <div className="Hello">
-        <a
-          href="https://electron-react-boilerplate.js.org/"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="books">
-              📚
-            </span>
-            Read our docs
-          </button>
-        </a>
-        <a
-          href="https://github.com/sponsors/electron-react-boilerplate"
-          target="_blank"
-          rel="noreferrer"
-        >
-          <button type="button">
-            <span role="img" aria-label="folded hands">
-              🙏
-            </span>
-            Donate
-          </button>
-        </a>
-      </div>
+    <div className="button_interval">
+      <FileUploader options={{ type: 'docx', buttonText: '导入word' }} onUpload={handleUpload} />
+      <FileUploader options={{ type: 'xlsx', buttonText: '导入Excel' }} onUpload={handleUpload} />
+      <FileUploader options={{ type: 'pdf', buttonText: '导入PDF' }} onUpload={handleUpload} />
     </div>
   );
 }
